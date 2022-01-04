@@ -9,12 +9,12 @@ import time
 
 
 #API ključ - pohranjen u -STREAMLIT mapi
-api_key = st.secrets["api_key"]
+api_key = st.secrets["8a3c08e182bbee243d335c7316fa9d26"]
 
 
 #API poziv sa OPEN WEATHER MAP web-aplikacije
-url = 'api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}'
-url_1 = 'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}'
+url = 'api.openweathermap.org/data/2.5/weather?q={city name}&appid={8a3c08e182bbee243d335c7316fa9d26}'
+url_1 = 'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={8a3c08e182bbee243d335c7316fa9d26}'
 
 #funkcija za dohvaćanje vremena
 def getweather(city):
