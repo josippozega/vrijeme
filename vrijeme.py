@@ -1,24 +1,20 @@
-#Moduli
+# Modules
 import streamlit as st
 import requests
 from datetime import datetime , timedelta
 import pandas as pd
 import matplotlib.pyplot as plt
-import time
+import time 
 
-
-
-#API ključ - pohranjen u -STREAMLIT mapi
+# INSERT YOUR API  KEY WHICH YOU PASTED IN YOUR secrets.toml file 
 api_key = "8a3c08e182bbee243d335c7316fa9d26"
 
+url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={8a3c08e182bbee243d335c7316fa9d26}'
+url_1 = 'https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon={}&dt={}&appid={8a3c08e182bbee243d335c7316fa9d26}'
 
-#API poziv sa OPEN WEATHER MAP web-aplikacije
-url = 'api.openweathermap.org/data/2.5/weather?q={city name}&appid={8a3c08e182bbee243d335c7316fa9d26}'
-url_1 = 'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={8a3c08e182bbee243d335c7316fa9d26}'
-
-#funkcija za dohvaćanje vremena
+# Function for LATEST WEATHER DATA
 def getweather(city):
-    result = requests.get(url.format(city, api_key))
+    result = requests.get(url.format(city, api_key))     
     if result:
         json = result.json()
         #st.write(json)
@@ -36,7 +32,7 @@ def getweather(city):
     else:
         print("error in search !")
 
-#funkcija za dohvaćanje povijesnih podataka o vremenu
+# Function for HISTORICAL DATA
 def get_hist_data(lat,lon,start):
     res = requests.get(url_1.format(lat,lon,start,api_key))
     data = res.json()
@@ -46,38 +42,39 @@ def get_hist_data(lat,lon,start):
         temp.append(t)     
     return data , temp
 
-#pišemo aplikaciju
-st.header('Vremenska prognoza')
-st.markdown('Aplikacija by prof. Josip Požega, mag.inf.')
+# Let's write the Application
 
-im1,im2 = st_columns(2)
-with im2:
-    image0 = 'vrijeme.jpg'
-    st.image(image0,use_column_width=True,caption = 'Negdje u Hrvatskoj: ')
-with im1:
-    image1 = 'vrijeme2.jpg'
-    st.image(image1, caption='Koristit ćemo Open Weather Map API kao naš izvor podataka. ',use_column_width=True)
+st.header('Streamlit Weather Report')   
+st.markdown('https://openweathermap.org/api') 
 
-col1, col2 = st_columns(2)
+im1,im2 = st.beta_columns(2)
+with im2:  
+    image0 = 'random4.jpg' 
+    st.image(image0,use_column_width=True,caption = 'Somewhere in The Netherlands.')
+with im1:    
+    image1 = 'OPENWEATHER.png'
+    st.image(image1, caption='We will use Open Weather Map API as our Data Resource.',use_column_width=True)
+
+col1, col2 = st.beta_columns(2)
 
 with col1:
-    city_name = st.text_input("Unesite grad za koji želite vidjeti prognozu vremena: ")
+    city_name = st.text_input("Enter a city name")
     #show_hist = st.checkbox('Show me history')
-with col2:
+with col2:  
 		if city_name:
 		        res , json = getweather(city_name)
 		        #st.write(res)
-		        st.success('Trenutna temperatura: ' + str(round(res[1],2)))
-		        st.info('Osjećaj: ' + str(round(res[2],2)))
+		        st.success('Current: ' + str(round(res[1],2)))
+		        st.info('Feels Like: ' + str(round(res[2],2)))
 		        #st.info('Humidity: ' + str(round(res[3],2)))
 		        st.subheader('Status: ' + res[7])
 		        web_str = "![Alt Text]"+"(http://openweathermap.org/img/wn/"+str(res[6])+"@2x.png)"
-		        st.markdown(web_str)
-
-if city_name:
-    show_hist = st.expander(label = 'Vremenska prognoza zadnjih 5 dana')
+		        st.markdown(web_str)  
+		
+if city_name:        
+    show_hist = st.beta_expander(label = 'Last 5 Days History')
     with show_hist:
-            start_date_string = st.date_input('Datum: ')
+            start_date_string = st.date_input('Current Date')
             #start_date_string = str('2021-06-26')
             date_df = []
             max_temp_df = []
@@ -89,10 +86,10 @@ if city_name:
                         his , temp = get_hist_data(res[5],res[4],int(timestamp_1))
                         date_df.append(date_Str)
                         max_temp_df.append(max(temp) - 273.5)
-
+                
             df = pd.DataFrame()
-            df['Datum'] = date_df
+            df['Date'] = date_df
             df['Max temp'] = max_temp_df
             st.table(df)
 
-	#st.map(pd.DataFrame({'lat' : [res[5]] , 'lon' : [res[4]]},columns = ['lat','lon']))
+	st.map(pd.DataFrame({'lat' : [res[5]] , 'lon' : [res[4]]},columns = ['lat','lon']))
