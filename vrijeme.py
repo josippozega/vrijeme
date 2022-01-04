@@ -50,15 +50,15 @@ def get_hist_data(lat,lon,start):
 st.header('Vremenska prognoza')
 st.markdown('Aplikacija by prof. Josip Požega, mag.inf.')
 
-#im1,im2 = st_columns(2)
-#with im2:
-  #  image0 = 'vrijeme.jpg'
-  #  st.image(image0,use_column_width=True,caption = 'Negdje u Hrvatskoj: ')
-#with im1:
- #   image1 = 'vrijeme2.jpg'
-  #  st.image(image1, caption='Koristit ćemo Open Weather Map API kao naš izvor podataka. ',use_column_width=True)
+im1,im2 = st_columns(2)
+with im2:
+    image0 = 'vrijeme.jpg'
+    st.image(image0,use_column_width=True,caption = 'Negdje u Hrvatskoj: ')
+with im1:
+    image1 = 'vrijeme2.jpg'
+    st.image(image1, caption='Koristit ćemo Open Weather Map API kao naš izvor podataka. ',use_column_width=True)
 
-#col1, col2 = st_columns(2)
+col1, col2 = st_columns(2)
 
 with col1:
     city_name = st.text_input("Unesite grad za koji želite vidjeti prognozu vremena: ")
