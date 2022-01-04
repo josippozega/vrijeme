@@ -9,7 +9,7 @@ import time
 
 
 #API ključ - pohranjen u -STREAMLIT mapi
-api_key = st.secrets["8a3c08e182bbee243d335c7316fa9d26"]
+api_key = st.secrets["ce49ebd5e31a354469333e44943ea182"]
 
 
 #API poziv sa OPEN WEATHER MAP web-aplikacije
