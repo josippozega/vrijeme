@@ -18,7 +18,7 @@ url_1 = 'https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exc
 
 #funkcija za dohvaćanje vremena
 def getweather(city):
-result = requests.get(url.format(city, api_key))
+    result = requests.get(url.format(city, api_key))
     if result:
         json = result.json()
         #st.write(json)
