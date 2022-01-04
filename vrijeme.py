@@ -95,5 +95,4 @@ if city_name:
             df['Max temp'] = max_temp_df
             st.table(df)
 
-	st.map(pd.DataFrame
-	       ({'lat' : [res[5]] , 'lon' : [res[4]]},columns = ['lat','lon']))
+	#st.map(pd.DataFrame({'lat' : [res[5]] , 'lon' : [res[4]]},columns = ['lat','lon']))
