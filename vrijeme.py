@@ -14,7 +14,7 @@ url_1 = 'https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={}&lon=
 
 # Function for LATEST WEATHER DATA
 def getweather(city):
-    result = requests.get(url.format(city, api_key))     
+    result = requests.get(url.format(city, 8a3c08e182bbee243d335c7316fa9d26))     
     if result:
         json = result.json()
         #st.write(json)
