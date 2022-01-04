@@ -37,7 +37,7 @@ def getweather(city):
         print("error in search !")
 
 #funkcija za dohvaćanje povijesnih podataka o vremenu
-def get_hist_data(lat,lon,start)
+def get_hist_data(lat,lon,start):
  res = requests.get(url_1.format(lat,lon,start,api_key))
     data = res.json()
     temp = []
