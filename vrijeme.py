@@ -38,12 +38,12 @@ def getweather(city):
 
 #funkcija za dohvaćanje povijesnih podataka o vremenu
 def get_hist_data(lat,lon,start):
- res = requests.get(url_1.format(lat,lon,start,api_key))
+    res = requests.get(url_1.format(lat,lon,start,api_key))
     data = res.json()
     temp = []
     for hour in data["hourly"]:
         t = hour["temp"]
-        temp.append(t)
+        temp.append(t)     
     return data , temp
 
 #pišemo aplikaciju
